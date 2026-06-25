@@ -49,30 +49,19 @@ def limpiar(valor):
 
 
 def crear_driver():
-    service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
 
-    if not MODO_VISIBLE:
-        options.add_argument("--headless=new")
-    else:
-        options.add_argument("--start-maximized")
+    options.binary_location = "/usr/bin/chromium"
 
+    options.add_argument("--headless=new")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-extensions")
-    options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--disable-logging")
     options.add_argument("--log-level=3")
-    options.add_argument("--silent")
 
-    prefs = {
-        "profile.managed_default_content_settings.images": 2,
-        "profile.default_content_setting_values.notifications": 2,
-    }
-
-    options.add_experimental_option("prefs", prefs)
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    service = Service("/usr/bin/chromedriver")
 
     driver = Chrome(service=service, options=options)
     driver.set_page_load_timeout(TIMEOUT_PAGINA)
