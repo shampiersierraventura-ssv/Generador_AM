@@ -1,7 +1,6 @@
 streamlit
 pandas
 selenium==4.23.1
-webdriver-manager
 docxtpl
 python-docx
 openpyxl
