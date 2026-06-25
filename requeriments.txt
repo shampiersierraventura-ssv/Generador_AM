@@ -1,0 +1,8 @@
+streamlit
+pandas
+selenium
+webdriver-manager
+docxtpl
+python-docx
+openpyxl
+lxml
