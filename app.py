@@ -26,9 +26,9 @@ st.set_page_config(
 )
 
 MODO_VISIBLE = False
-TIMEOUT_PAGINA = 30
-TIMEOUT_ELEMENTO = 15
-TIMEOUT_MODAL = 10
+TIMEOUT_PAGINA = 60
+TIMEOUT_ELEMENTO = 30
+TIMEOUT_MODAL = 30
 MAX_REINTENTOS = 2
 
 CARPETA_INPUT = Path("Input")
@@ -57,12 +57,22 @@ def crear_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-logging")
+    options.add_argument("--log-level=3")
+    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--disable-background-timer-throttling")
+    options.add_argument("--disable-backgrounding-occluded-windows")
+    options.add_argument("--disable-renderer-backgrounding")
+
+    options.page_load_strategy = "eager"
 
     service = Service("/usr/bin/chromedriver")
 
     driver = Chrome(service=service, options=options)
-    driver.set_page_load_timeout(TIMEOUT_PAGINA)
-    driver.set_script_timeout(15)
+
+    driver.set_page_load_timeout(60)
+    driver.set_script_timeout(60)
 
     return driver
 
